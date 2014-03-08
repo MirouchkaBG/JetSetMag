@@ -6,6 +6,7 @@ package edu.esprit.Gui;
 
 import edu.esprit.dao.ClientDAO;
 import edu.esprit.entities.Client;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -19,9 +20,20 @@ public class AffichageClients extends AbstractTableModel{
 
     List<Client> listeCl= new ArrayList<Client>();
     String[] headers = {"Id","Prénom","Login","Password","Num_tel","Pays","Email"};
+    
     public AffichageClients() {
-       ClientDAO stdao = new ClientDAO();
-       listeCl=stdao.DisplayAllCLients();
+//      if (e.getSource()==GestionClient.BtRechercher)
+//      {
+//          ClientDAO stdao = new ClientDAO();
+//          Client cltrouvé= new Client();
+//          cltrouvé=stdao.findClientByNum(Integer.parseInt(GestionClient.jtxtcritère.getText()));
+//      }
+//       
+//      else {
+          ClientDAO stdao = new ClientDAO();
+          listeCl=stdao.DisplayAllCLients();
+       
+//      }
     }
      public int getRowCount() {
        return listeCl.size();
@@ -33,6 +45,7 @@ public class AffichageClients extends AbstractTableModel{
     {
         return headers[column];
     }
+   
     public Object getValueAt(int rowIndex, int columnIndex) {
        switch(columnIndex){
            case 0:

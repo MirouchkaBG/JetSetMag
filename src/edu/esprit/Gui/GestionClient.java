@@ -8,14 +8,15 @@ import com.sun.rowset.internal.Row;
 import java.io.IOException;
 import edu.esprit.Gui.InterfaceGlobale;
 import edu.esprit.dao.ClientDAO;
+import edu.esprit.entities.Admin;
+import edu.esprit.entities.Client;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Hajoura
  */
 public class GestionClient extends javax.swing.JPanel {
-    public int mot ;
-    //  private final InterfaceGlobale j;
 
     /**
      * Creates new form GestionClient
@@ -36,23 +37,36 @@ public class GestionClient extends javax.swing.JPanel {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        bt_supprimerclient = new javax.swing.JButton();
-        btAjouterClient = new javax.swing.JButton();
+        BtRechercher = new javax.swing.JButton();
+        LabelCritère = new javax.swing.JLabel();
+        jtxtcritère = new javax.swing.JTextField();
+        jComboCritère = new javax.swing.JComboBox();
 
+        setBackground(new java.awt.Color(204, 204, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jTable2.setFont(new java.awt.Font("Bookman Old Style", 0, 14)); // NOI18N
+        jTable2.getTableHeader().setFont(new java.awt.Font("Bookman Old Style", 0, 18));
+        jTable2.setRowHeight(30);
         jTable2.setModel(new AffichageClients());
         jScrollPane2.setViewportView(jTable2);
 
-        bt_supprimerclient.setText("Supprimer client");
-        bt_supprimerclient.addActionListener(new java.awt.event.ActionListener() {
+        BtRechercher.setText("Rechercher");
+        BtRechercher.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtRechercher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_supprimerclientActionPerformed(evt);
+                BtRechercherActionPerformed(evt);
             }
         });
 
-        btAjouterClient.setText("Ajouter client");
-        btAjouterClient.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAjouterClientActionPerformed(evt);
+        LabelCritère.setText("Critère de recherche");
+
+        jComboCritère.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Prénom", "Login", "Email", " " }));
+        jComboCritère.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboCritèreItemStateChanged(evt);
             }
         });
 
@@ -60,42 +74,115 @@ public class GestionClient extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bt_supprimerclient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btAjouterClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(LabelCritère, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jComboCritère, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jtxtcritère, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(BtRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(btAjouterClient)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelCritère, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboCritère)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtcritère, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(bt_supprimerclient)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAjouterClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAjouterClientActionPerformed
-        new AjoutCompteClient().setVisible(true);
-    }//GEN-LAST:event_btAjouterClientActionPerformed
+    private void BtRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRechercherActionPerformed
+        String[] headers = {"Id","Prénom","Login","Password","Num_tel","Pays","Email"};
+        DefaultTableModel TableModel=new DefaultTableModel(headers, 0);
+        String crit=jtxtcritère.getText();
 
-    private void bt_supprimerclientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_supprimerclientActionPerformed
+        if(jComboCritère.getSelectedItem().equals(""))
+            	JOptionPane.showMessageDialog(null,"Veuillez choisir le critère de recherche !!");
+        else  if((jComboCritère.getSelectedItem().equals(""))&&(jtxtcritère.equals("")))
+            	JOptionPane.showMessageDialog(null,"Veuillez remplir les champs !!");
+        else
+        {
+            if (jComboCritère.getSelectedItem().equals("Id"))
             
-    }//GEN-LAST:event_bt_supprimerclientActionPerformed
+        {   
+            if(crit.equalsIgnoreCase(""))
+               {   
+                    JOptionPane.showMessageDialog(null,"Entrer l'id du client !!");
+               }
+            else{
+                    ClientDAO stdao = new ClientDAO();
+                    Client cltrouvé= new Client();
+                    cltrouvé=stdao.findClientByNum(Integer.parseInt(jtxtcritère.getText()));
+                    TableModel.addRow(new Object[]{cltrouvé.getIdClient(),cltrouvé.getPrenom(),cltrouvé.getLogin(),cltrouvé.getPassword(),cltrouvé.getTelephone(),cltrouvé.getPays(),cltrouvé.getEmail()}); 
+                    jTable2.setModel(TableModel);
+             }
+        }
+         if (jComboCritère.getSelectedItem().equals("Prénom"))
+        {   
+            if(crit.equalsIgnoreCase(""))
+               {   
+                    JOptionPane.showMessageDialog(null,"Entrer le prénom du client !!");
+               }
+            else{
+                    ClientDAO stdao = new ClientDAO();
+                    Client cltrouvé= new Client();
+                    cltrouvé=stdao.findClientByPrénom(crit);
+                    TableModel.addRow(new Object[]{cltrouvé.getIdClient(),cltrouvé.getPrenom(),cltrouvé.getLogin(),cltrouvé.getPassword(),cltrouvé.getTelephone(),cltrouvé.getPays(),cltrouvé.getEmail()}); 
+                    jTable2.setModel(TableModel);
+            }
+        }
+          if (jComboCritère.getSelectedItem().equals("Login"))
+        {   
+            if(crit.equalsIgnoreCase(""))
+               {   
+                    JOptionPane.showMessageDialog(null,"Entrer le login du client !!");
+               }
+            else {
+                    ClientDAO stdao = new ClientDAO();
+                    Client cltrouvé= new Client();
+                    cltrouvé=stdao.findClientByLogin(crit);
+                    TableModel.addRow(new Object[]{cltrouvé.getIdClient(),cltrouvé.getPrenom(),cltrouvé.getLogin(),cltrouvé.getPassword(),cltrouvé.getTelephone(),cltrouvé.getPays(),cltrouvé.getEmail()}); 
+                    jTable2.setModel(TableModel);
+            }
+        }
+           if (jComboCritère.getSelectedItem().equals("Email"))
+            
+        {   
+            if(crit.equalsIgnoreCase(""))
+               {   
+                    JOptionPane.showMessageDialog(null,"Entrer l'email du client !!");
+               }
+            else {
+                    ClientDAO stdao = new ClientDAO();
+                    Client cltrouvé= new Client();
+                    cltrouvé=stdao.findClientByEmail(crit);
+                    TableModel.addRow(new Object[]{cltrouvé.getIdClient(),cltrouvé.getPrenom(),cltrouvé.getLogin(),cltrouvé.getPassword(),cltrouvé.getTelephone(),cltrouvé.getPays(),cltrouvé.getEmail()}); 
+                    jTable2.setModel(TableModel);
+            }
+        }
+      }
+    }//GEN-LAST:event_BtRechercherActionPerformed
+
+    private void jComboCritèreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboCritèreItemStateChanged
+            jTable2.setModel(new AffichageClients());
+    }//GEN-LAST:event_jComboCritèreItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAjouterClient;
-    private javax.swing.JButton bt_supprimerclient;
+    protected static javax.swing.JButton BtRechercher;
+    private javax.swing.JLabel LabelCritère;
+    private javax.swing.JComboBox jComboCritère;
     private javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTable2;
+    protected static javax.swing.JTextField jtxtcritère;
     // End of variables declaration//GEN-END:variables
 }

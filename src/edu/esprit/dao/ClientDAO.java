@@ -75,7 +75,7 @@ public class ClientDAO {
     }
 
 
-      public Client findStockByNum(int id){
+      public Client findClientByNum(int id){
 
         String requete = "select * from client where IdClient=?";
 
@@ -87,7 +87,7 @@ public class ClientDAO {
         while (resultat.next()){
 
             cl.setIdClient(resultat.getInt(1));
-            cl.setNom(resultat.getString(2));
+            //cl.setNom(resultat.getString(2));
             cl.setPrenom(resultat.getString(3));
             cl.setLogin(resultat.getString(4));
             cl.setPassword(resultat.getString(5));           
@@ -95,6 +95,92 @@ public class ClientDAO {
             cl.setPays(resultat.getString(9));
             cl.setTelephone(resultat.getInt(10));
 
+        }
+        return cl;
+        }
+        catch(SQLException ex){
+            System.out.println("erreur lors du chargement"+ex.getMessage());
+            return null;
+        }
+    }
+
+      public Client findClientByPrénom(String prenom){
+
+        String requete = "select * from client where Prenom=?";
+
+        try{
+        PreparedStatement ps = MyConnection.getInstance().prepareStatement(requete);
+        ps.setString(1, prenom);
+        ResultSet resultat = ps.executeQuery();
+        Client cl = new Client();
+        while (resultat.next()){
+
+            cl.setIdClient(resultat.getInt(1));
+            //cl.setNom(resultat.getString(2));
+            cl.setPrenom(resultat.getString(3));
+            cl.setLogin(resultat.getString(4));
+            cl.setPassword(resultat.getString(5));           
+            cl.setEmail(resultat.getString(8));
+            cl.setPays(resultat.getString(9));
+            cl.setTelephone(resultat.getInt(10));
+
+        }
+        return cl;
+        }
+        catch(SQLException ex){
+            System.out.println("erreur lors du chargement"+ex.getMessage());
+            return null;
+        }
+    }
+
+      public Client findClientByLogin(String login){
+
+        String requete = "select * from client where Login=?";
+
+        try{
+        PreparedStatement ps = MyConnection.getInstance().prepareStatement(requete);
+        ps.setString(1, login);
+        ResultSet resultat = ps.executeQuery();
+        Client cl = new Client();
+        while (resultat.next()){
+
+            cl.setIdClient(resultat.getInt(1));
+            //cl.setNom(resultat.getString(2));
+            cl.setPrenom(resultat.getString(3));
+            cl.setLogin(resultat.getString(4));
+            cl.setPassword(resultat.getString(5));           
+            cl.setEmail(resultat.getString(8));
+            cl.setPays(resultat.getString(9));
+            cl.setTelephone(resultat.getInt(10));
+
+        }
+        return cl;
+        }
+        catch(SQLException ex){
+            System.out.println("erreur lors du chargement"+ex.getMessage());
+            return null;
+        }
+    }
+
+      public Client findClientByEmail(String email){
+
+        String requete = "select * from client where Email=?";
+
+        try{
+        PreparedStatement ps = MyConnection.getInstance().prepareStatement(requete);
+        ps.setString(1, email);
+        ResultSet resultat = ps.executeQuery();
+        Client cl = new Client();
+        while (resultat.next()){
+
+            cl.setIdClient(resultat.getInt(1));
+            //cl.setNom(resultat.getString(2));
+            cl.setPrenom(resultat.getString(3));
+            cl.setLogin(resultat.getString(4));
+            cl.setPassword(resultat.getString(5));           
+            cl.setEmail(resultat.getString(8));
+            cl.setPays(resultat.getString(9));
+            cl.setTelephone(resultat.getInt(10));
         }
         return cl;
         }

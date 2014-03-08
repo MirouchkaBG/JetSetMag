@@ -7,7 +7,7 @@ package edu.esprit.Gui;
 import edu.esprit.dao.ClientDAO;
 import edu.esprit.entities.Client;
 import java.awt.Color;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,9 +21,10 @@ public class AjoutCompteClient extends javax.swing.JFrame {
      * Creates new form AjoutCompteClient
      */
     public AjoutCompteClient() {
+       
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,12 +37,10 @@ public class AjoutCompteClient extends javax.swing.JFrame {
 
         buttonGroupHommeFemme = new javax.swing.ButtonGroup();
         BtSauvegarder = new javax.swing.JButton();
-        BtQuitter = new javax.swing.JButton();
+        BtAnnuler = new javax.swing.JButton();
         LabelNom = new javax.swing.JLabel();
         jLogin = new javax.swing.JTextField();
         jNumTel = new javax.swing.JTextField();
-        jPassword = new javax.swing.JTextField();
-        jPasswordCon = new javax.swing.JTextField();
         jNom = new javax.swing.JTextField();
         jPrenom = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -54,12 +53,15 @@ public class AjoutCompteClient extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jAge = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Tverif_mpV = new javax.swing.JLabel();
+        jPassword = new javax.swing.JPasswordField();
+        jPasswordCon = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 204));
 
         BtSauvegarder.setText("Sauvegarder");
         BtSauvegarder.addActionListener(new java.awt.event.ActionListener() {
@@ -68,18 +70,14 @@ public class AjoutCompteClient extends javax.swing.JFrame {
             }
         });
 
-        BtQuitter.setText("Quitter");
-
-        LabelNom.setText("Nom");
-
-        jPasswordCon.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPasswordConFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jPasswordConFocusLost(evt);
+        BtAnnuler.setText("Annuler");
+        BtAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtAnnulerActionPerformed(evt);
             }
         });
+
+        LabelNom.setText("Prénom & Nom ");
 
         buttonGroupHommeFemme.add(jRadioButton1);
         jRadioButton1.setText("Homme");
@@ -107,6 +105,20 @@ public class AjoutCompteClient extends javax.swing.JFrame {
 
         Tverif_mpV.setText("");
 
+        jPasswordCon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordConActionPerformed(evt);
+            }
+        });
+        jPasswordCon.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordConFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordConFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,82 +126,72 @@ public class AjoutCompteClient extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtSauvegarder)
-                            .addGap(18, 18, 18)
-                            .addComponent(BtQuitter))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSexe)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton1)
-                                        .addComponent(LabelPays))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(58, 58, 58)
-                                            .addComponent(jRadioButton2))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(48, 48, 48)
-                                            .addComponent(jComboPays, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addContainerGap(65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jSexe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LabelPays, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LabelNom, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Tverif_mpV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jComboPays, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPasswordCon, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jAge, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jAdresseElectronique, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jNumTel, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(LabelNom)
-                                    .addGap(0, 93, Short.MAX_VALUE))
-                                .addComponent(jPrenom))
+                            .addComponent(jPrenom, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jNom, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPasswordCon, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(Tverif_mpV, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLogin, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(jRadioButton2)
+                        .addGap(70, 70, 70))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(275, 275, 275)
+                .addComponent(BtSauvegarder)
+                .addGap(32, 32, 32)
+                .addComponent(BtAnnuler)
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(LabelNom)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelNom))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(43, 43, 43)
+                    .addComponent(jLabel2)
+                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(Tverif_mpV, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jPasswordCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Tverif_mpV, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addComponent(jNumTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,19 +200,22 @@ public class AjoutCompteClient extends javax.swing.JFrame {
                         .addComponent(jAdresseElectronique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jSexe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelPays)
-                    .addComponent(jComboPays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtSauvegarder)
-                    .addComponent(BtQuitter)))
+                    .addComponent(jRadioButton2)
+                    .addComponent(jSexe))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelPays)
+                            .addComponent(jComboPays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtSauvegarder)
+                            .addComponent(BtAnnuler))
+                        .addContainerGap())))
         );
 
         pack();
@@ -248,30 +253,67 @@ public class AjoutCompteClient extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs !");
 
        }
-       else {
-           
-            ClientDAO clt_dao= new ClientDAO();      
-            clt_dao.insertClient(clt);
-            JOptionPane.showMessageDialog(this, "Ajout effectué avec succès");
-            }
+       else { if(!jPassword.getText().equals(jPasswordCon.getText()))
+           JOptionPane.showMessageDialog(null,"Les deux mots de passe ne sont pas identiques ");
+            else {
+                ClientDAO clt_dao= new ClientDAO();      
+                clt_dao.insertClient(clt);
+                JOptionPane.showMessageDialog(this, "Ajout effectué avec succès");
+                GestionClient.jTable2.setModel(new AffichageClients());
+                jNom.setText("");
+                jAdresseElectronique.setText("");
+                jNumTel.setText("");
+                jPassword.setText("");
+                jPasswordCon.setText("");
+                jPrenom.setText("");
+                jLogin.setText("");
+                jAge.setText("");
+                Tverif_mpV.setText("");
+                jComboPays.setSelectedItem("");
+                jRadioButton1.setSelected(false);
+                jRadioButton2.setSelected(false);
+                 }
+       }
     }//GEN-LAST:event_BtSauvegarderActionPerformed
 
-    private void jPasswordConFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordConFocusLost
-                      Tverif_mpV.setVisible(true);
-        if((jPassword.getText().equals(jPasswordCon.getText()))&&(!jPassword.getText().equals(""))&&(!jPasswordCon.equals("")))
-	  {
-		Tverif_mpV.setForeground(new Color(0, 153, 0));
-		Tverif_mpV.setText("Les deux mots de passe sont identiques !!");
-	  }
-       else if(!jPassword.getText().equals(jPasswordCon.getText())){
-		Tverif_mpV.setForeground(Color.RED);
-		Tverif_mpV.setText("Les deux mots de passe ne sont pas identiques !!");
-	  }
-    }//GEN-LAST:event_jPasswordConFocusLost
+    private void jPasswordConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordConActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordConActionPerformed
 
     private void jPasswordConFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordConFocusGained
-                Tverif_mpV.setText("");
+        Tverif_mpV.setText("");
     }//GEN-LAST:event_jPasswordConFocusGained
+
+    private void jPasswordConFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordConFocusLost
+           if((jPassword.getText().equals(jPasswordCon.getText()))&&(!jPassword.getText().equals(""))&&(!jPasswordCon.equals("")))
+		{ 
+			Tverif_mpV.setForeground(new Color(0, 153, 0));
+			Tverif_mpV.setText("Les deux mots de passe sont identiques");
+		}
+              
+       else if (!jPassword.getText().equals(jPasswordCon.getText()))
+       {   
+			Tverif_mpV.setForeground(Color.RED);
+			Tverif_mpV.setText("Les deux mots de passe ne sont pas identiques !!");
+       }	
+             
+    }//GEN-LAST:event_jPasswordConFocusLost
+
+    private void BtAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAnnulerActionPerformed
+           jNom.setText("");
+           jAdresseElectronique.setText("");
+           jNumTel.setText("");
+           jPassword.setText("");
+           jPasswordCon.setText("");
+           jPrenom.setText("");
+           jLogin.setText("");
+           jAge.setText("");
+           Tverif_mpV.setText("");
+           jComboPays.setSelectedItem("");
+           jRadioButton1.setSelected(false);
+           jRadioButton2.setSelected(false);
+          
+    }//GEN-LAST:event_BtAnnulerActionPerformed
       
      /**
      * @param args the command line arguments
@@ -308,13 +350,14 @@ public class AjoutCompteClient extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtQuitter;
+    private javax.swing.JButton BtAnnuler;
     private javax.swing.JButton BtSauvegarder;
     private javax.swing.JLabel LabelNom;
     private javax.swing.JLabel LabelPays;
     private javax.swing.JLabel Tverif_mpV;
     private javax.swing.ButtonGroup buttonGroupHommeFemme;
     private javax.swing.JTextField jAdresseElectronique;
+    private javax.swing.JTextField jAge;
     private javax.swing.JComboBox jComboPays;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -325,12 +368,11 @@ public class AjoutCompteClient extends javax.swing.JFrame {
     private javax.swing.JTextField jLogin;
     private javax.swing.JTextField jNom;
     private javax.swing.JTextField jNumTel;
-    private javax.swing.JTextField jPassword;
-    private javax.swing.JTextField jPasswordCon;
+    private javax.swing.JPasswordField jPassword;
+    private javax.swing.JPasswordField jPasswordCon;
     private javax.swing.JTextField jPrenom;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel jSexe;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
