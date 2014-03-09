@@ -4,6 +4,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import edu.esprit.Gui.InterfaceGlobale;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Authentification extends javax.swing.JFrame {
@@ -36,7 +39,13 @@ public class Authentification extends javax.swing.JFrame {
           
           else {
               JOptionPane.showMessageDialog(this,"Authentification établie");
-              new InterfaceGlobale().setVisible(true);
+            try {
+                new InterfaceGlobale().setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
+            }
           }
     }//GEN-LAST:event_jConnectActionPerformed
 

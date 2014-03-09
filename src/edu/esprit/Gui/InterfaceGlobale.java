@@ -1,20 +1,24 @@
 /*
  * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * and open
  */
 package edu.esprit.Gui;
 
 import edu.esprit.dao.ClientDAO;
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Label;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,6 +32,9 @@ public class InterfaceGlobale extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         BtGestionClients = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -36,15 +43,21 @@ public class InterfaceGlobale extends javax.swing.JFrame {
         BtGénérationStat = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanelprincipal = new javax.swing.JPanel();
-        gestionClient1 = new edu.esprit.Gui.GestionClient();
         ajoutDeNotification2 = new edu.esprit.Gui.AjoutDeNotification();
         gestion21 = new edu.esprit.Gui.Gestion2();
+        gestionClient1 = new edu.esprit.Gui.GestionClient();
+        gestionElements1 = new edu.esprit.Gui.GestionElements();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         BtSupprimer = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
         lblHeure = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        jMenu1.setText("jMenu1");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Bookman Old Style", 2, 10)); // NOI18N
@@ -68,6 +81,11 @@ public class InterfaceGlobale extends javax.swing.JFrame {
 
         jButton4.setText("Gestion des élémens culturels");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Envoi de notification");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -102,7 +120,7 @@ public class InterfaceGlobale extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(BtGestionClients, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtGestionClients, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,9 +145,22 @@ public class InterfaceGlobale extends javax.swing.JFrame {
         jPanelprincipal.setForeground(new java.awt.Color(204, 204, 255));
         jPanelprincipal.setPreferredSize(new java.awt.Dimension(800, 600));
         jPanelprincipal.setLayout(new java.awt.CardLayout());
-        jPanelprincipal.add(gestionClient1, "gestionClient");
         jPanelprincipal.add(ajoutDeNotification2, "AjoutNotif");
         jPanelprincipal.add(gestion21, "gestion2");
+        jPanelprincipal.add(gestionClient1, "gestionClient");
+
+        javax.swing.GroupLayout gestionElements1Layout = new javax.swing.GroupLayout(gestionElements1);
+        gestionElements1.setLayout(gestionElements1Layout);
+        gestionElements1Layout.setHorizontalGroup(
+            gestionElements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 757, Short.MAX_VALUE)
+        );
+        gestionElements1Layout.setVerticalGroup(
+            gestionElements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 424, Short.MAX_VALUE)
+        );
+
+        jPanelprincipal.add(gestionElements1, "GestionElements");
 
         jLabel1.setText("Modifier Mot de Passe");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -150,15 +181,35 @@ public class InterfaceGlobale extends javax.swing.JFrame {
             }
         });
 
+        Date maDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        lblDate.setText(dateFormat.format(maDate));
+        lblDate.setFont(new Font("Andalus", Font.PLAIN, 14));
+        lblDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/esprit/img/clock.png")));
+        lblDate.setVisible(true);
+
+        lblHeure.setText("");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm:ss");
+        lblHeure.setText(dateFormat2.format(maDate));
+        lblDate.setFont(new Font("Andalus", Font.PLAIN, 14));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/esprit/img/deconnecter.jpg"))); // NOI18N
+        jLabel3.setText("Se déconnecter");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/esprit/img/acceuil.png"))); // NOI18N
+        jLabel4.setText("Acceuil");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelprincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,39 +218,43 @@ public class InterfaceGlobale extends javax.swing.JFrame {
                             .addComponent(BtSupprimer, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(341, 341, 341)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                            .addComponent(lblHeure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHeure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82))))
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel3)
+                        .addGap(109, 109, 109))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblHeure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblHeure, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(31, 31, 31)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtSupprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,14 +267,15 @@ public class InterfaceGlobale extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public InterfaceGlobale() throws IOException {
+    public InterfaceGlobale() throws IOException, ParseException {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1000, 480);
+
         //setBackground(Color.yellow);
-        Date maDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        lblDate.setText(dateFormat.format(maDate));
+
+
+
 //                final String nom_fichier_image = "/edu/esprit/img/background.jpg";
 //		 JPanel panneau = new JPanel()
 //       {
@@ -232,12 +288,18 @@ public class InterfaceGlobale extends javax.swing.JFrame {
 //           }
 //       };
 //         getContentPane().add(panneau);
+        
+        
         initComponents();
     }
 
     public void goGestionclient() {
         CardLayout card = (CardLayout) jPanelprincipal.getLayout();
         card.show(jPanelprincipal, "gestionClient");
+    }
+    public void goGestionElements() {
+        CardLayout card = (CardLayout) jPanelprincipal.getLayout();
+        card.show(jPanelprincipal, "GestionElements");
     }
 
     public void goGestion2() {
@@ -294,6 +356,10 @@ public class InterfaceGlobale extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtGénérationStatActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       goGestionElements();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -325,8 +391,11 @@ public class InterfaceGlobale extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-
-                    new InterfaceGlobale().setVisible(true);
+                    try {
+                        new InterfaceGlobale().setVisible(true);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(InterfaceGlobale.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(InterfaceGlobale.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -340,6 +409,7 @@ public class InterfaceGlobale extends javax.swing.JFrame {
     private edu.esprit.Gui.AjoutDeNotification ajoutDeNotification2;
     private edu.esprit.Gui.Gestion2 gestion21;
     private edu.esprit.Gui.GestionClient gestionClient1;
+    private edu.esprit.Gui.GestionElements gestionElements1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -347,8 +417,12 @@ public class InterfaceGlobale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelprincipal;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblHeure;
     // End of variables declaration//GEN-END:variables

@@ -10,9 +10,6 @@ package edu.esprit.Gui;
  */
 public class Gestion2 extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Gestion2
-     */
     public Gestion2() {
         initComponents();
     }
