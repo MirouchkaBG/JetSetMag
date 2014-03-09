@@ -9,7 +9,7 @@ package edu.esprit.entities;
  * @author Hajoura
  */
 public class Client {
-    
+        private int hahah;
         private int IdClient; 
         private String Nom;
         private String Prenom;
